@@ -21,7 +21,7 @@ function promiseAll(iterable) {
       handlePromise(Promise.resolve(element), currentIndex++);
     }
 
-    if (!currentIndex) {
+    if (currentIndex === 0) {
       resolve(result);
     }
   });
