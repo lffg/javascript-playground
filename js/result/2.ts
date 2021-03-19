@@ -22,6 +22,12 @@ class ResultPrototype<T, E> {
   readonly $$type;
 
   constructor(value: unknown, type: ResultType) {
+    if (new.target !== Ok && new.target !== Err) {
+      throw new TypeError(
+        'Invalid instantiation of `ResultPrototype`. This class should be only instantiated through the inheritance of `Ok` or `Err`.'
+      );
+    }
+
     this.#innerValue = value;
     this.$$type = type;
   }
@@ -161,7 +167,7 @@ function err<E, T = never>(error: E): Result<T, E> {
 }
 
 //
-// Utility types.
+// Other types
 //
 
 type ResultMatchMap<T, Tr, E, Er> = {
@@ -170,7 +176,7 @@ type ResultMatchMap<T, Tr, E, Er> = {
 };
 
 //
-// Utility functions.
+// Utility functions
 //
 
 function assertNever(val: never): never {
@@ -180,32 +186,4 @@ function assertNever(val: never): never {
 
 function unreachable(message?: string): never {
   throw new Error(!message ? 'Unreachable' : `Unreachable; ${message}`);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//                                                                            //
-//                                API EXAMPLE                                 //
-//                                                                            //
-////////////////////////////////////////////////////////////////////////////////
-
-const a: Result<number, string> = ok(123);
-const b: Result<bigint, string> = err('Algo deu errado.');
-
-if (a.isErr()) {
-  assertType<string>(a.error());
-  throw a.error();
-}
-
-assertType<number>(a.data());
-
-if (b.isErr()) {
-  assertType<string>(b.error());
-  throw b.error();
-}
-
-assertType<bigint>(b.data());
-
-// test api
-function assertType<T>(param: T) {
-  void param;
 }
