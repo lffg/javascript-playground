@@ -1,5 +1,5 @@
 /**
- * # Result<T, E>.
+ * # `Result<T, E>`
  *
  * `Result` is a type that represents either success (`Ok`) or failure (`Err`).
  *
