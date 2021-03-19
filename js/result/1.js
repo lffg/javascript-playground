@@ -28,7 +28,9 @@ const resultPrototype = {
   expect(message) {
     return this.match({
       ok: (data) => data,
-      err: () => throw new Error(message)
+      err: () => {
+        throw new Error(message)
+      }
     });
   },
   
