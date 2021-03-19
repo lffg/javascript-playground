@@ -23,7 +23,7 @@ class Result {
     return this.#type === ERR;
   }
 
-  // Creates a new Result type by mapping the ok variant.
+  // Creates a new Result type by mapping the ok variant wrapped value.
   // Error variant is ignored (although a new Result is also created).
   map(fn) {
     return this.match({
