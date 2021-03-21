@@ -9,9 +9,7 @@ export async function walk(basePath: string, options: Options = {}) {
   options.exclude ||= new Set();
 
   const result: string[] = [];
-
-  // So sad that JS does not implement TCO... ;(
-  const queue: string[] = [basePath];
+  const queue = [basePath];
 
   while (queue.length) {
     const currentDirPath = queue.pop()!;
