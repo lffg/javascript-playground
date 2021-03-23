@@ -64,12 +64,16 @@ class Calculator extends Parent {
   };
 }
 
-// Um problema é que, embora a nível de tipos o TypeScript faça métodos definidos
-// como "class field" (https://github.com/tc39/proposal-class-fields), não é
-// possível modificá-los via alteração prototípica antes da instanciação da classe.
+// Um problema é que, apesar de a nível de tipos o TypeScript faça parecer que
+// a função também faz o currying de métodos definidos como "class fields" (ver
+// definição em (https://github.com/tc39/proposal-class-fields), esse não é o
+// caso, uma vez que esses "métodos" são definidos apenas mediante instanciação
+// da classe.
 //
-// Não encontrei nenhum jeito de impedir a "detecção" de métodos definidos através
-// de class fields a nível do TypeScript, por isso incluí `sub` na lista de excluídos.
+// Não encontrei nenhum jeito de impedir que o TypeScript detecte métodos
+// definidos como class fields (para ele métodos definidos no protótipo e
+// definidos via class fields é a mesma coisa).
+// Por isso incluí `sub`, um "class field method", na lista de excluídos.
 const CurriedCalculator = curryClass(Calculator, {
   exclude: ['sub']
 });
