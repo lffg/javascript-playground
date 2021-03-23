@@ -66,7 +66,7 @@ class Calculator extends Parent {
 
 // Um problema é que, apesar de a nível de tipos o TypeScript faça parecer que
 // a função também faz o currying de métodos definidos como "class fields" (ver
-// definição em (https://github.com/tc39/proposal-class-fields), esse não é o
+// definição em https://github.com/tc39/proposal-class-fields), esse não é o
 // caso, uma vez que esses "métodos" são definidos apenas mediante instanciação
 // da classe.
 //
