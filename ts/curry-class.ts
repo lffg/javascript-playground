@@ -3,8 +3,6 @@ type Class<P, N = unknown> = {
   new (): N;
 };
 
-type Obj = Record<string | symbol, unknown>;
-
 type CurriedClass<P, Exclude extends string> = {
   [K in keyof P]: P[K] extends (...args: infer Args) => infer Return
     ? // Is method
