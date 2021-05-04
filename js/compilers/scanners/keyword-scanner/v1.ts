@@ -1,3 +1,6 @@
+// please note:
+// i am still learning about compilers, this is probably a naïve implementation
+
 interface KwTree {
   children: Map<string, KwTree>;
   final: string | null;
