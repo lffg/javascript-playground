@@ -7,10 +7,7 @@ int main()
   int target;
   scanf("%u", &target);
 
-  int current;
-  scanf("%u", &current);
-
-  while (current != 0)
+  while (1)
   {
     int current;
     scanf("%u", &current);
