@@ -7,7 +7,10 @@ int main()
   int target;
   scanf("%u", &target);
 
-  while (1)
+  int current;
+  scanf("%u", &current);
+
+  while (current != 0)
   {
     int current;
     scanf("%u", &current);
@@ -19,4 +22,5 @@ int main()
   }
 
   printf("%u\n", freq);
+  return 0;
 }
