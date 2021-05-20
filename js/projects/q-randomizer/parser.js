@@ -8,7 +8,7 @@ function parseImgName(str) {
 
   const match = str.match(IMAGE_IDENTIFICATION_REGEX);
   if (!match) {
-    throw new TypeError('Invalid image identification name.');
+    throw new Error('Invalid image identification name.');
   }
 
   const { qSimpleAnswer, qComplexAnswer, ...base } = match.groups;
