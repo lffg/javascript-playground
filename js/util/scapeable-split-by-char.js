@@ -15,8 +15,8 @@ function scapeableSplitByChar(controlChar, str) {
   return substrs;
 }
 
-function* withPrev(iterable) {
-  let prev = null;
+function* withPrev(iterable, prev0) {
+  let prev = prev0;
   for (const el of iterable) {
     yield [el, prev];
     prev = el;
