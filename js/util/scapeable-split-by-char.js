@@ -1,6 +1,10 @@
 // Please note:
 //
-// This can also be solved by using a regex with a negative lookbehind.
+// This can also be solved by using a regex with a negative lookbehind,
+// something like:
+//
+//     str.split(/(?<!\\),/);
+//
 // I've implemented this just for fun. :-)
 
 function scapeableSplitByChar(controlChar, str) {
