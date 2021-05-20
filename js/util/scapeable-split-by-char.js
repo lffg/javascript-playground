@@ -1,6 +1,6 @@
 // Please note:
 //
-// This can also be solved by using a regex with a negative lookbehind
+// This can also be solved by using a regex with a negative lookbehind.
 // I've implemented this just for fun. :-)
 
 function scapeableSplitByChar(controlChar, str) {
