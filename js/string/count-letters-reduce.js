@@ -1,5 +1,3 @@
-// Não faça isso. :))
-
 const countLetters = (str) =>
   Array.prototype.reduce.call(
     str,
