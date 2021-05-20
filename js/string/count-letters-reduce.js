@@ -9,3 +9,9 @@ const countLetters = (str) =>
       }),
     {}
   );
+
+//
+// Example usage:
+//
+
+countLetters('AAABBC'); //-> { 'A': 3, 'B': 2, 'C': 1 }
