@@ -3,6 +3,11 @@
 #define DEBUG 1
 #define MAX 2021
 
+typedef struct {
+  int data[MAX];
+  int len;
+} Bign;
+
 void print_int_arr(int arr[], int size) {
   printf("(%d) { ", size);
   for (int i = 0; i < size; i++) {
@@ -14,23 +19,25 @@ void print_int_arr(int arr[], int size) {
   printf(" }\n");
 }
 
-void print_bign(int bign[], int bign_size) {
+void print_bign(Bign *bign) {
   if (DEBUG) {
-    print_int_arr(bign, bign_size);
+    print_int_arr(bign->data, bign->len);
   }
-  if (bign[0] == 1) {
+  if (bign->data[0] == 1) {
     printf("-");
   }
-  for (int i = bign_size - 1; i >= 1; i--) {
-    printf("%d", bign[i]);
+  for (int i = bign->len - 1; i >= 1; i--) {
+    printf("%d", bign->data[i]);
   }
   printf("\n");
 }
 
-int create_bign(int num, int bign[]) {
-  bign[0] = 0;
+Bign create_bign(int num) {
+  Bign bign;
+
+  bign.data[0] = 0;
   if (num < 0) {
-    bign[0] = 1;
+    bign.data[0] = 1;
     num *= -1;
   }
 
@@ -38,12 +45,13 @@ int create_bign(int num, int bign[]) {
   while (num != 0) {
     if (i >= MAX - 1) {
       printf("Capped.\n");
-      return i;
+      break;
     }
-    bign[i++] = num % 10;
+    bign.data[i++] = num % 10;
     num /= 10;
   }
-  return i;
+  bign.len = i;
+  return bign;
 }
 
 int main() {
@@ -51,8 +59,6 @@ int main() {
   printf("Enter a number: ");
   scanf("%d", &n);
 
-  int bign[MAX];
-  int bign_size = create_bign(n, bign);
-
-  print_bign(bign, bign_size);
+  Bign bign = create_bign(n);
+  print_bign(&bign);
 }
