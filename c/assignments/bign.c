@@ -1,13 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define DEBUG 1
-#define MAX 2021
+#define BIGN_MAX_LENGTH 2021
 
-typedef struct {
-  int data[MAX];
-  int len;
-} Bign;
-
+// Prints an array of int members.
 void print_int_arr(int arr[], int size) {
   printf("(%d) { ", size);
   for (int i = 0; i < size; i++) {
@@ -19,6 +16,13 @@ void print_int_arr(int arr[], int size) {
   printf(" }\n");
 }
 
+// Bign.
+typedef struct {
+  int data[BIGN_MAX_LENGTH];
+  int len;
+} Bign;
+
+// Prints the given Bign.
 void bign_print(Bign *bign) {
   if (DEBUG) {
     print_int_arr(bign->data, bign->len);
@@ -32,6 +36,7 @@ void bign_print(Bign *bign) {
   printf("\n");
 }
 
+// Creates and returns a new Bign.
 Bign bign_create(int num) {
   Bign bign;
 
@@ -43,7 +48,7 @@ Bign bign_create(int num) {
 
   int i = 1;
   while (num != 0) {
-    if (i >= MAX - 1) {
+    if (i >= BIGN_MAX_LENGTH - 1) {
       printf("Capped.\n");
       break;
     }
