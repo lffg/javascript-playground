@@ -19,7 +19,7 @@ void print_int_arr(int arr[], int size) {
   printf(" }\n");
 }
 
-void print_bign(Bign *bign) {
+void bign_print(Bign *bign) {
   if (DEBUG) {
     print_int_arr(bign->data, bign->len);
   }
@@ -32,7 +32,7 @@ void print_bign(Bign *bign) {
   printf("\n");
 }
 
-Bign create_bign(int num) {
+Bign bign_create(int num) {
   Bign bign;
 
   bign.data[0] = 0;
@@ -59,6 +59,6 @@ int main() {
   printf("Enter a number: ");
   scanf("%d", &n);
 
-  Bign bign = create_bign(n);
-  print_bign(&bign);
+  Bign bign = bign_create(n);
+  bign_print(&bign);
 }
