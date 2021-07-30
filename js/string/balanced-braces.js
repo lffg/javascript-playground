@@ -1,6 +1,6 @@
 // This must be a "paired" array.
 // Each opening brace has to be in a even index. Its matching "closing" brace
-// should be the next position.
+// should be in the next position.
 const BRACES = ['(', ')', '[', ']', '{', '}'];
 
 // EOF character
