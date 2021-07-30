@@ -28,8 +28,7 @@ function isClosingBrace(brace) {
 }
 
 function Ranged(value, start, end = start + 1) {
-  const proto = {};
-  return Object.assign(Object.create(proto), { value, start, end });
+  return { value, start, end };
 }
 
 function isBalanced(str) {
