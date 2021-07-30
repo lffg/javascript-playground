@@ -7,19 +7,6 @@ const BRACES = ['(', ')', '[', ']', '{', '}'];
 const EOF = Object.create(null);
 EOF[Symbol.toPrimitive] = () => '<end of input>';
 
-function memo1(fn) {
-  const map = new Map();
-  return (arg) => {
-    const ref = map.get(arg);
-    if (ref) {
-      return ref;
-    }
-    const result = fn(arg);
-    map.set(arg, result);
-    return result;
-  };
-}
-
 const getBraceIndex = memo1((brace) => {
   return BRACES.indexOf(brace);
 });
@@ -84,10 +71,13 @@ function isBalanced(str) {
       .toString();
   }
 
-  return true;
+  return 'ok.';
 }
 
-// Error reporter
+//
+// ERROR REPORTER CLASSES, FUNCTIONS, ETC
+//
+
 function Reporter(source) {
   return {
     invalid: (invalidRangedChar) => ({
@@ -150,9 +140,27 @@ function maybeQuote(str, shouldQuote = true) {
   return str;
 }
 
-// node.js
+//
+// MISC
+//
+
+function memo1(fn) {
+  const map = new Map();
+  return (arg) => {
+    const ref = map.get(arg);
+    if (ref) {
+      return ref;
+    }
+    const result = fn(arg);
+    map.set(arg, result);
+    return result;
+  };
+}
+
+//
+// NODE.JS
+//
+
 const str = process.argv[2];
 console.log(`Checking "${str}"...\n`);
-const res = isBalanced(str);
-console.log(res === true ? 'ok.' : res);
-console.log('');
+console.log(isBalanced(str) + '\n');
