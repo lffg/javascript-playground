@@ -71,5 +71,7 @@ int main() {
 
   printf("\n=====================\n");
   print_int_arr(curr_len, arr);
+  free(arr);
+
   return 0;
 }
