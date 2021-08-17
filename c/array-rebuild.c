@@ -2,8 +2,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define INITIAL_CAP 2
-#define INCR_CAP(cap_ptr) *cap_ptr += 2
+#define INITIAL_CAP 1
+#define INCR_CAP(cap_ptr) *cap_ptr *= 2
+
+void print_int_arr(int len, int* arr) {
+  printf("{ ");
+  for (int i = 0; i < len; i++) {
+    printf("%i", arr[i]);
+    if (i + 1 != len) {
+      printf(", ");
+    }
+  }
+  printf(" }\n");
+}
 
 void die(const char* message) {
   printf("%s\n", message);
@@ -51,11 +62,14 @@ int main() {
   while (true) {
     printf("Enter a number: ");
     int n;
-    scanf("%i", &n);
+    int res = scanf("%i", &n);
+    if (res == 0 || res == EOF) {
+      break;
+    }
     arr_insert(&curr_cap, &curr_len, &arr, n);
-
-    // TODO: Implement an exit way.
   }
 
+  printf("\n=====================\n");
+  print_int_arr(curr_len, arr);
   return 0;
 }
