@@ -60,10 +60,9 @@ int main() {
   }
 
   while (true) {
-    printf("Enter a number: ");
     int n;
-    int res = scanf("%i", &n);
-    if (res == 0 || res == EOF) {
+    printf("Enter a number: ");
+    if (scanf("%i", &n) <= 0) {
       printf("\nFinished.\n");
       break;
     }
