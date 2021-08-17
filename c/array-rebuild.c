@@ -5,10 +5,10 @@
 #define INITIAL_CAP 1
 #define INCR_CAP(cap_ptr) *cap_ptr *= 2
 
-void print_int_arr(int len, int* arr) {
+void print_arr_f(int len, int* arr, const char* fmt) {
   printf("{ ");
   for (int i = 0; i < len; i++) {
-    printf("%i", arr[i]);
+    printf(fmt, arr[i]);
     if (i + 1 != len) {
       printf(", ");
     }
@@ -64,13 +64,14 @@ int main() {
     int n;
     int res = scanf("%i", &n);
     if (res == 0 || res == EOF) {
+      printf("\nFinished.\n");
       break;
     }
     arr_insert(&curr_cap, &curr_len, &arr, n);
   }
 
   printf("\n=====================\n");
-  print_int_arr(curr_len, arr);
+  print_arr_f(curr_len, arr, "%i");
   free(arr);
 
   return 0;
