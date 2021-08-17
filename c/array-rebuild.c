@@ -5,17 +5,6 @@
 #define INITIAL_CAP 2
 #define INCR_CAP(cap_ptr) *cap_ptr += 2
 
-void print_int_arr(int len, int* arr) {
-  printf("{ ");
-  for (int i = 0; i < len; i++) {
-    printf("%i", arr[i]);
-    if (i + 1 != len) {
-      printf(", ");
-    }
-  }
-  printf(" }\n");
-}
-
 void die(const char* message) {
   printf("%s\n", message);
   exit(1);
@@ -64,6 +53,8 @@ int main() {
     int n;
     scanf("%i", &n);
     arr_insert(&curr_cap, &curr_len, &arr, n);
+
+    // TODO: Implement an exit way.
   }
 
   return 0;
