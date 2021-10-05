@@ -10,7 +10,8 @@ const Dep = (ident) => ({ kind: DEP_DECL, ident });
 function analyzeList(list) {
   const unusedIdents = new Set();
   const globalIdents = new Map();
-  const deps = new Set();
+  const deps = [];
+
   for (const item of list) {
     switch (item.kind) {
       case USE_DECL: {
@@ -19,7 +20,7 @@ function analyzeList(list) {
         break;
       }
       case DEP_DECL: {
-        deps.add(item.ident);
+        deps.push(item.ident);
         break;
       }
       default: {
@@ -27,6 +28,7 @@ function analyzeList(list) {
       }
     }
   }
+
   for (const ident of deps) {
     if (!globalIdents.has(ident)) {
       error(`Reference error: Use of undeclared variable '${ident}'.`);
@@ -37,6 +39,7 @@ function analyzeList(list) {
     }
     globalIdents.get(ident)();
   }
+
   if (unusedIdents.size !== 0) {
     for (const ident of unusedIdents) {
       warn(`Unused declared variable '${ident}'.`);
@@ -47,10 +50,10 @@ function analyzeList(list) {
 const itemList = [
   Dep('b'),
   Use('a', () => console.log('a called!')),
+  Dep('a'),
   Dep('b'),
   Use('c', () => console.log('c called!')),
-  Use('b', () => console.log('b called!')),
-  Dep('a')
+  Use('b', () => console.log('b called!'))
 ];
 
 analyzeList(itemList);
