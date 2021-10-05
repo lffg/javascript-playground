@@ -1,26 +1,30 @@
-const warn = console.warn.bind(console);
-const error = console.error.bind(console);
+const warn = (msg) => console.warn(`warning: ${msg}`);
+const error = (msg) => console.error(`error: ${msg}`);
 
-const USE_DECL = Symbol('use declaration');
-const DEP_DECL = Symbol('dependency declaration');
+const LET_DECL = Symbol('let declaration');
+const USE_DECL = Symbol('dependency declaration');
 
-const Use = (ident, fn) => ({ kind: USE_DECL, ident, fn });
-const Dep = (ident) => ({ kind: DEP_DECL, ident });
+const Let = (ident, fn) => ({ kind: LET_DECL, ident, fn });
+const Use = (ident) => ({ kind: USE_DECL, ident });
 
 function analyzeList(list) {
   const unusedIdents = new Set();
-  const globalIdents = new Map();
-  const deps = [];
+  const idents = new Map();
+  const uses = [];
 
   for (const item of list) {
     switch (item.kind) {
-      case USE_DECL: {
-        globalIdents.set(item.ident, item.fn);
+      case LET_DECL: {
+        if (idents.has(item.ident)) {
+          error(`Identifier '${item.ident}' has already been declared.`);
+          continue;
+        }
+        idents.set(item.ident, item.fn);
         unusedIdents.add(item.ident);
         break;
       }
-      case DEP_DECL: {
-        deps.push(item.ident);
+      case USE_DECL: {
+        uses.push(item.ident);
         break;
       }
       default: {
@@ -29,31 +33,31 @@ function analyzeList(list) {
     }
   }
 
-  for (const ident of deps) {
-    if (!globalIdents.has(ident)) {
-      error(`Reference error: Use of undeclared variable '${ident}'.`);
+  for (const ident of uses) {
+    if (!idents.has(ident)) {
+      error(`Use of undeclared identifier '${ident}'.`);
       continue;
     }
     if (unusedIdents.has(ident)) {
       unusedIdents.delete(ident);
     }
-    globalIdents.get(ident)();
+    idents.get(ident)();
   }
 
   if (unusedIdents.size !== 0) {
     for (const ident of unusedIdents) {
-      warn(`Unused declared variable '${ident}'.`);
+      warn(`Unused identifier '${ident}'.`);
     }
   }
 }
 
 const itemList = [
-  Dep('b'),
-  Use('a', () => console.log('a called!')),
-  Dep('a'),
-  Dep('b'),
-  Use('c', () => console.log('c called!')),
-  Use('b', () => console.log('b called!'))
+  Use('b'),
+  Let('a', () => console.log('a called!')),
+  Use('a'),
+  Use('b'),
+  Let('c', () => console.log('c called!')),
+  Let('b', () => console.log('b called!'))
 ];
 
 analyzeList(itemList);
