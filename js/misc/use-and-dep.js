@@ -2,7 +2,7 @@ const warn = (msg) => console.warn(`warning: ${msg}`);
 const error = (msg) => console.error(`error: ${msg}`) || { ok: false };
 
 const LET_DECL = Symbol('let declaration');
-const USE_DECL = Symbol('dependency declaration');
+const USE_DECL = Symbol('use declaration');
 
 const Let = (ident, fn) => ({ kind: LET_DECL, ident, fn });
 const Use = (ident) => ({ kind: USE_DECL, ident });
