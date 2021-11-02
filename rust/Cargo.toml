@@ -1,2 +1,2 @@
 [workspace]
-members = ["./workspaces/*"]
+members = ["iter-with-last"]
