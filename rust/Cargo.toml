@@ -1,2 +1,2 @@
 [workspace]
-members = ["iter-with-last", "iter-to-arr"]
+members = ["iter-with-last", "iter-to-arr", "string-builder"]
