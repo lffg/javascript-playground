@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
+// Implemented using an extension trait.
 pub mod ext {
     use super::*;
 
@@ -22,6 +23,7 @@ pub mod ext {
     }
 }
 
+// Implemented using a "bare" function.
 pub mod r#fn {
     use super::*;
 
@@ -41,16 +43,18 @@ pub mod r#fn {
 mod tests {
     use std::collections::HashMap;
 
-    use super::{ext::Freq, r#fn::freq};
-
     #[test]
     fn test_freq_extension_trait() {
+        use super::ext::Freq;
+
         let freq = "AAABBC".chars().freq();
         assert_eq!(freq, HashMap::from([('A', 3), ('B', 2), ('C', 1)]));
     }
 
     #[test]
     fn test_freq_fn() {
+        use super::r#fn::freq;
+
         let iter = "AAABBC".chars();
         assert_eq!(freq(iter), HashMap::from([('A', 3), ('B', 2), ('C', 1)]));
     }
