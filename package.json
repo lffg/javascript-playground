@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "@lffg/playground-js",
+  "version": "1.0.0",
+  "author": "Luiz Felipe Gonçalves <https://luizfelipe.dev>",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^16.11.11",
+    "eslint": "7.x",
+    "eslint-config-lffg": "^21.0.0-1",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.2"
+  },
+  "eslintConfig": {
+    "extends": "lffg",
+    "rules": {
+      "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 0
+    }
+  },
+  "prettier": "eslint-config-lffg/prettier"
+}
