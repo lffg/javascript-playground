@@ -36,10 +36,9 @@ class Queue {
 
   // Applies `cb` for each element, O(n).
   forEach(cb) {
-    let i = this.#first;
-    while (i !== this.#next) {
-      cb(this.#data[i]);
-      i = (i + 1) % this.#cap;
+    for (let i = 0; i < this.#len; i++) {
+      const pos = (this.#first + i) % this.#cap;
+      cb(this.#data[pos]);
     }
   }
 
