@@ -3,9 +3,7 @@ class Queue {
 
   #cap = 0;
   #len = 0;
-
   #first = 0;
-  #next = 0;
 
   // Initializes a new Queue with the provided capacity.
   constructor(cap) {
@@ -17,9 +15,7 @@ class Queue {
     if (this.#len == this.#cap) {
       throw new Error("Not enough capacity");
     }
-    this.#len++;
-    this.#data[this.#next] = el;
-    this.#next = (this.#next + 1) % this.#cap;
+    this.#data[(this.#first + this.#len++) % this.#cap] = el;
   }
 
   // Removes the first element, O(1).
@@ -27,11 +23,11 @@ class Queue {
     if (!this.#len) {
       throw new Error("Already empty");
     }
-    this.#len--;
-    const old = this.#data[this.#first];
+    const el = this.#data[this.#first];
     this.#data[this.#first] = null; // This isn't needed.
-    this.#first = (this.#first + 1) % this.#cap;
-    return old;
+    this.#first = (this.#first + 1) % this.#cap; 
+    this.#len--;
+    return el;
   }
 
   // Applies `cb` for each element, O(n).
